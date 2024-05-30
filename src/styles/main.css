@@ -1,0 +1,81 @@
+* {
+    margin: 0;
+    padding: 0;
+    outline: 0;
+    border: 0;
+    box-sizing: border-box;
+}
+
+:root{
+    --gray-100: rgb(241 245 249);
+    --gray-200: rgb(239 242 245);
+    --gray-300: rgb(203 213 225);
+    --gray-400: rgb(148 163 184);
+    --gray-500: rgb(100 116 139);
+    --gray-700: rgb(51 65 85);
+    --gray-900: rgb(15 23 42);
+    --green-light: rgb(0 168 62);
+    --green-primary: rgb(75 204 0);
+    --dark-green: #35af00;
+    --white: #fff;
+
+    /* main */
+    --bg-main-color: var(--white);
+    --text-color: var(--gray-500);
+
+    /* links */
+    --link-color: var(--gray-700);
+    --link-active-color: var(--gray-900);
+    --link-active-border-color: var(--gray-500);
+    --link-hover-color: var(--green-primary);
+
+    /* dropdown */
+    --dropdown-background: var(--gray-200);
+    --dropdown-hover-background: var(--gray-300);
+    --dropdown-head-color: var(--gray-900);
+    --dropdown-body-background: var(--white);
+    --dropdown-body-shadow-color: var(--gray-200);
+    --dropdown-body-item-color: var(--gray-700);
+    --dropdown-body-item-hover-color: var(--gray-900);
+    --dropdown-body-item-hover-background: var(--gray-100);
+    --dropdown-body-item-active-background: var(--white);
+    --dropdown-body-item-active-outline-color: var(--gray-300);
+
+    /* elements z-index */
+    --dropdown-z-index: 5;
+}
+
+body {
+    background: var(--bg-main-color);
+    font-family: Inter, -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Helvetica, Arial, sans-serif, Apple Color Emoji, Segoe UI Emoji, Segoe UI Symbol;
+    font-size: 13px;
+    line-height: 1.425;
+    box-sizing: border-box;
+    min-height: 100vh;
+    color: var(--text-color);
+}
+
+a, a:active, a:visited {
+    color: var(--link-color);
+    text-decoration: none;
+}
+
+a:hover{
+    color: var(--link-hover-color);
+}
+
+.page_wrap {
+    min-height: 100vh;
+}
+
+.page_content{
+    width: 1200px;
+    margin: 0 auto;
+    display: flex;
+    flex-wrap: nowrap;
+    align-items: flex-start;
+}
+
+.page_block {
+    margin-bottom: 12px;
+}

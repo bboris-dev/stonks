@@ -1,0 +1,85 @@
+.dropdown {
+    display: inline-block;
+    position: relative;
+}
+
+.dropdown_head {
+    background: var(--dropdown-background);
+    border-radius: .5rem;
+}
+
+.dropdown_head:hover, .dropdown_head.active {
+    background: var(--dropdown-hover-background);
+}
+
+.dropdown_title {
+    display: flex;
+    flex-wrap: nowrap;
+    align-items: flex-start;
+    color: var(--dropdown-head-color);
+    padding: .375rem .625rem;
+    cursor: pointer;
+}
+
+.dropdown_title_text {
+    flex-grow: 1;
+    font-weight: 600;
+    line-height: 1rem;
+}
+
+.dropdown_arrow {
+    margin-left: .5rem;
+}
+
+.dropdown_elements {
+    position: absolute;
+    inset: auto auto 0 0;
+    margin: 0;
+    background: var(--dropdown-body-background);
+    box-shadow: 0 0 0 2px var(--dropdown-body-shadow-color), 0 0 transparent;
+    -moz-box-shadow: 0 0 0 2px var(--dropdown-body-shadow-color), 0 0 transparent;
+    -webkit-box-shadow: 0 0 0 2px var(--dropdown-body-shadow-color), 0 0 transparent;
+    border-radius: 5px;
+    -moz-border-radius: 5px;
+    -webkit-border-radius: 5px;
+    padding: 5px;
+    width: 14rem;
+    transform-origin: top left;
+    transition: transform, opacity ease-in-out 100ms;
+    -moz-transition: -moz-transform, opacity ease-in-out 100ms;
+    -webkit-transition: -webkit-transform, opacity ease-in-out 100ms;
+    -o-transition: -o-transform, opacity ease-in-out 100ms;
+    opacity: 0;
+    transform: scale(0.2);
+    z-index: -1;
+}
+
+.dropdown_elements.active {
+    visibility: visible;
+    z-index: var(--dropdown-z-index);
+    opacity: 1;
+    transform: scale(1);
+}
+
+.dropdown_element {
+    color: var(--dropdown-body-item-color);
+    font-weight: 600;
+    font-size: 0.875rem;
+    line-height: 1.25rem;
+    padding: .75rem .5rem;
+    border-radius: 5px;
+    -moz-border-radius: 5px;
+    -webkit-border-radius: 5px;
+}
+
+.dropdown_element:hover, .dropdown_element.active:hover {
+    cursor: pointer;
+    background: var(--dropdown-body-item-hover-background);
+    color: var(--dropdown-body-item-hover-color);
+    outline: 0;
+}
+
+.dropdown_element.active {
+    background: var(--dropdown-body-item-active-background);
+    outline: 1px solid var(--dropdown-body-item-active-outline-color);
+}
