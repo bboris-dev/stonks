@@ -1,4 +1,4 @@
-import React, {useState, useRef, useEffect} from "react";
+import React, {useState, useRef, useEffect, useCallback} from "react";
 import {className} from "@helpers/class";
 
 import "./Dropdown.css";
@@ -47,10 +47,18 @@ export default function Dropdown({items, onChange = () => {}}) {
         setPos(countDropdownPos(dropRef.current, items.length));
     };
 
-    const changeItem = (item) => {
+    const changeItem = useCallback((item) => {
         setActiveItem(item);
         onChange(item);
-    };
+    }, []);
+
+    const handleBodyClick = useCallback((e) => {
+        if (dropRef.current.contains(e.target)) {
+            return;
+        }
+
+        setIsOpen(false);
+    }, []);
 
     useEffect(() => {
         if (activeItem !== null) {
@@ -73,30 +81,24 @@ export default function Dropdown({items, onChange = () => {}}) {
 
         // установка событий пересчета позиции
         window.addEventListener('resize', recalculatePos, false);
-        document.addEventListener('click', (e) => {
-            if (dropRef.current.contains(e.target)) {
-                return;
-            }
+        document.addEventListener('click', handleBodyClick, false);
 
-            setIsOpen(false);
-        }, false);
+        return () => {
+            window.removeEventListener('resize', recalculatePos);
+            document.removeEventListener('click', handleBodyClick);
+        };
     }, []);
 
-    // не рендерим компонент без дефолт значения
-    if (activeItem === null) {
-        return (<></>);
-    }
-
-    const toggleItems = () => {
+    const toggleItems = useCallback(() => {
         setIsOpen(isOpenVal => !isOpenVal);
 
         // перед открытием делаем пересчет
         if (isOpen === false) {
             recalculatePos();
         }
-    }
+    }, []);
 
-    const changeValue = (e) => {
+    const changeValue = useCallback((e) => {
         const id = e.target.getAttribute('id').replace(ID_PREFIX, '');
         const item = items[id];
         if (!item) {
@@ -106,7 +108,12 @@ export default function Dropdown({items, onChange = () => {}}) {
 
         changeItem(item);
         setIsOpen(false);
-    };
+    }, []);
+
+    // не рендерим компонент без дефолт значения
+    if (activeItem === null) {
+        return (<></>);
+    }
 
     return (
         <div className="dropdown" ref={dropRef} onScroll={recalculatePos} data-title={activeItem.title} data-value={activeItem.value}>
