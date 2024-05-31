@@ -12,32 +12,26 @@ const DROPDOWN_WIDTH = 224;
 const DROPDOWN_ITEM_HEIGHT = 46.5;
 const DROPDOWN_HEAD_HEIGHT = 40;
 const DROPDOWN_ITEMS_GAP = 10;
+const DROPDOWN_MAX_ITEM_COUNT = 6;
 
 const DEFAULT_DROP_POS = [0, -DROPDOWN_HEAD_HEIGHT];
 
 function countDropdownPos(el, itemsLength) {
+    const itemHeight = itemsLength > DROPDOWN_MAX_ITEM_COUNT ? (DROPDOWN_ITEM_HEIGHT * DROPDOWN_MAX_ITEM_COUNT) : (DROPDOWN_ITEM_HEIGHT * itemsLength);
     const bounds = el.getBoundingClientRect();
-    const bottom = bounds.bottom + window.scrollY + DROPDOWN_ITEM_HEIGHT * itemsLength;
+    const bottom = bounds.bottom + window.scrollY + itemHeight;
     const right = bounds.left + window.scrollX + DROPDOWN_WIDTH;
 
     const canDrawRight = document.documentElement.clientWidth > right;
     const canDrawBot = document.documentElement.clientHeight > bottom;
 
     const x = canDrawRight ? 0 : (-DROPDOWN_WIDTH + bounds.width);
-    const y = canDrawBot ? (DROPDOWN_ITEM_HEIGHT * itemsLength + DROPDOWN_ITEMS_GAP) : -DROPDOWN_HEAD_HEIGHT;
+    const y = canDrawBot ? (itemHeight + DROPDOWN_ITEMS_GAP) : -DROPDOWN_HEAD_HEIGHT;
 
     return [x, y];
 }
 
 export default function Dropdown({items, onChange = () => {}}) {
-    // todo remove mock
-    items = [
-        {value: 0, title: 'value 1', default: true},
-        {value: 3, title: 'value 3'},
-        {value: 4, title: 'value 4'},
-        {value: 5, title: 'value 5'},
-    ];
-
     const [activeItem, setActiveItem] = useState(null);
     const [isOpen, setIsOpen] = useState(false);
     const [pos, setPos] = useState(DEFAULT_DROP_POS);
