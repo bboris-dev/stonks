@@ -7,6 +7,7 @@
 }
 
 :root{
+    --gray-50: rgb(248 250 252);
     --gray-100: rgb(241 245 249);
     --gray-200: rgb(239 242 245);
     --gray-300: rgb(203 213 225);
@@ -40,6 +41,14 @@
     --dropdown-body-item-hover-background: var(--gray-100);
     --dropdown-body-item-active-background: var(--white);
     --dropdown-body-item-active-outline-color: var(--gray-300);
+
+    /* stocks */
+    --stocks-border-color: var(--gray-200);
+    --stocks-row-bg-hover: var(--gray-50);
+    --stocks-cell-bg: var(--white);
+    --stocks-cell-color: var(--gray-900);
+    --stocks-name-color: var(--gray-700);
+    --stocks-ticker-color: var(--gray-500);
 
     /* elements z-index */
     --dropdown-z-index: 5;

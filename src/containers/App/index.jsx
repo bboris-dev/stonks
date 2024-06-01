@@ -34,6 +34,7 @@ const App = () => {
             <BrowserRouter>
                 <Routes>
                     <Route path="/" element={<MainLayout header footer element={MainPage} />} />
+                    {/*<Route path="/?page=:id" element={<MainLayout header footer element={MainPage} />} />*/}
                     <Route path="/top" element={<MainLayout header element={MainPage} />} />
                     <Route path="/404" element={<ErrorPage code={404} />} />
                     <Route path="*" element={<Navigate to="/404" replace />} />
