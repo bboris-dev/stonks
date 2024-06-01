@@ -31,7 +31,7 @@ function countDropdownPos(el, itemsLength) {
     return [x, y];
 }
 
-export default function Dropdown({items, onChange = () => {}}) {
+export default function Dropdown({items, chosenValue, onChange = () => {}}) {
     const [activeItem, setActiveItem] = useState(null);
     const [isOpen, setIsOpen] = useState(false);
     const [pos, setPos] = useState(DEFAULT_DROP_POS);
@@ -82,6 +82,16 @@ export default function Dropdown({items, onChange = () => {}}) {
             document.removeEventListener('click', handleBodyClick);
         };
     }, []);
+
+    useEffect(() => {
+        if (!activeItem || !chosenValue) {
+            return;
+        }
+
+        if (activeItem.value !== chosenValue.value) {
+            setActiveItem(chosenValue);
+        }
+    }, [chosenValue])
 
     const toggleItems = useCallback(() => {
         setIsOpen(isOpenVal => !isOpenVal);
